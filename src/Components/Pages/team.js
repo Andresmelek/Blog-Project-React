@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Employe from '../Common/singleservice';
+import Employe from '../Common/employess';
 
 //images 
 import img1 from '../Assets/img/team/1.jpg';

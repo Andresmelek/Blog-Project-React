@@ -9,46 +9,73 @@ import Services from './Components/Pages/services';
 import Portfolio from './Components/Pages/portfolio';
 import Team from './Components/Pages/team';
 import Contact from './Components/Pages/contacts';
+import AdminWrapper from './Components/AdminWrapper';
+import Login from './Components/Pages/login';
 
 class App extends Component {
   render(){
   return (
     <Router>
-      <PageWrapper>
+
+      <Route
+         path="/login"
+         render = {props => 
+         <AdminWrapper>
+            <Login/>
+         </AdminWrapper>
+          }
+      />
         <Route 
           exact={true}
           path="/"
-          component={Home}
+          render={props =>
+            <PageWrapper>
+            <Home {...props}/>
+            </PageWrapper>}
         />
 
         <Route
           path="/about"
-          component={About}
+          render={props =>
+          <PageWrapper>
+            <About {...props}/>
+          </PageWrapper>}
         />
 
         <Route 
             path="/services"
-            component={Services}
+            render={props =>
+              <PageWrapper>
+              <Services {...props}/>
+              </PageWrapper>}
 
         />
 
         <Route 
             path="/portfolio"
-            component={Portfolio}
+            render={props =>
+              <PageWrapper>
+              <Portfolio {...props}/>
+              </PageWrapper>}
         />
 
         <Route 
             path="/team"
-            component={Team}
+            render={props =>
+              <PageWrapper>
+              <Team {...props}/>
+              </PageWrapper>}
 
         />
 
         <Route 
             path="/contact"
-            component={Contact}
+            render={props =>
+              <PageWrapper>
+              <Contact {...props}/>
+              </PageWrapper>}
 
         />
-      </PageWrapper>
       </Router>
 
       
