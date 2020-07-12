@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import Field from '../Common/fields';
 import {withFormik} from 'formik';
 import * as Yup from 'yup';
+import {connect} from 'react-redux';
+import * as authActions from '../../store/actions/authActions';
 
 const fields = [
-    {name: 'name', elementName: 'input', type: 'text', placeholder:'Your Name'},
     {name: 'email', elementName: 'input', type: 'email', placeholder:'Your email'},
+    {name: 'password', elementName: 'input', type: 'password', placeholder:'Your password'},
+
 
 ]
 
@@ -19,6 +22,10 @@ class Login extends Component {
                         <div className="row">
                             <h1>Login</h1>
                         </div>
+                        <form onSubmit={e => {
+                            e.preventDefault();
+                            this.props.login(this.props.values.email, this.props.values.password)
+                        }}>
                         <div className="row">
                             {fields.map((field, index) => { 
                                 return (
@@ -26,18 +33,19 @@ class Login extends Component {
                                     <Field {...field} key={index}
                                     value={this.props.values[field.name]}
                                     name={field.name}
-                                    onChange={this.props.hangleChange}
+                                    onChange={this.props.handleChange}
                                     onBlur={this.props.onBlur}
                                     touched={this.props.touched[field.name]}
                                     errors={this.props.errors[field.name]}
                                 />
                                 </div>)
+                                })
                             }
-                            )}
                             <div className="col-md-12">
                             <button className="btn btn-primary">Login</button>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -45,7 +53,25 @@ class Login extends Component {
     }
 }
 
-export default withFormik({
+const mapStateToProps  = state => {
+    return ({
+        auth: state.auth
+    })
+}
+
+const mapDispatchToProps = dispatch => {
+    return ({
+        login: (email, pass) => {
+            console.log("Loging user", email);
+            dispatch(authActions.login(email, pass));
+        }
+    })
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withFormik({
     mapPropsToValues: () => ({
         email: "",
         password:""
@@ -56,5 +82,6 @@ export default withFormik({
     }),
     handleSubmit: (values, {setSubmitting}) => {
         console.log('Loging attempt', values);
+        //login(values.email, values.password);
     }
-})(Login);
+})(Login));
