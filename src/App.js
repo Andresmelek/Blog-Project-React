@@ -13,14 +13,61 @@ import Contact from './Components/Pages/contacts';
 import AdminWrapper from './Components/AdminWrapper';
 import LoginWrapper from './Components/loginWrapper';
 import Login from './Components/Pages/login';
-import Dashboard from './Components/Pages/dashboard'
+
+//Admins Pages
+import Dashboard from './Components/Pages/Admin/dashboard';
+import Users from './Components/Pages/Admin/users';
+import Posts from './Components/Pages/Admin/posts';
 
 class App extends Component {
   render(){
   return (
     <Router>
 
+      <Route 
+        path="/login/users"
+        render = {props => {
+          console.log(props)
+         return (
+           <div>
+          {this.props.auth.token?
+           <AdminWrapper>
+             <Users/>
+           </AdminWrapper>
+          :
+           <LoginWrapper>
+             <Login/>
+           </LoginWrapper>
+          }
+          </div>
+       
+         )
+        }}
+      />
+
+      <Route 
+        path="/login/posts"
+        render = {props => {
+          console.log(props)
+         return (
+           <div>
+          {this.props.auth.token?
+           <AdminWrapper>
+             <Posts/>
+           </AdminWrapper>
+          :
+           <LoginWrapper>
+             <Login/>
+           </LoginWrapper>
+          }
+          </div>
+       
+         )
+        }}
+      />
+
       <Route
+        exact={true}
          path="/login"
          render = {props => {
            console.log(props)
@@ -39,7 +86,7 @@ class App extends Component {
         
           )
           }}
-      />
+        />
         <Route 
           exact={true}
           path="/"
