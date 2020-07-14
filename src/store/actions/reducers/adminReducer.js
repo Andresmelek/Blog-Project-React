@@ -1,6 +1,7 @@
 const defaultState = {
     users: [],
-    posts: []
+    posts: [],
+    post: {}
 }
 
 
@@ -23,7 +24,13 @@ const admin = (state = defaultState, action) => {
             posts: state.posts.concat(action.payload)
         }
 
-    } else {
+    }  else if (action.type === 'EDIT_POST'){
+        return {
+            ...state,
+            post: action.payload
+        }
+
+    }else {
         return state
     }
 }

@@ -39,3 +39,14 @@ export const addPost = (post, token) => {
         })
     }
 }
+
+export const getSinglePost = (id, token) => {
+    return (dispatch) => {
+        API.getSinglePost(id, token, res => {
+            dispatch({
+                type: 'EDIT_POST',
+                payload: res.data
+            })
+        })
+    }
+}

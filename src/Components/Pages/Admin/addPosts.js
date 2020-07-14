@@ -54,6 +54,15 @@ class AddPosts extends Component {
 
         }
     }
+
+    //To intert data into
+    componentDidMount(props, state) {
+        console.log('here', this.props.match.params)
+        if (this.props.match.params.view === 'edit' && this.props.match.params.id){
+            this.props.getSinglePost(this.props.match.params.id, this.props.auth.token)
+        }
+    }
+
     render(){
         const { classes } = this.props;
         return (
@@ -119,6 +128,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     addPost: (post, token) => {
         dispatch(adminActions.addPost(post, token))
+    },
+    getSinglePost: (id, token) => {
+        dispatch(adminActions.getSinglePost(id, token))
     }
 
 })
@@ -127,12 +139,12 @@ export default withRouter(connect(
         mapStateToProps,
         mapDispatchToProps
     )(withFormik({
-        mapPropsToValues: () => ({
-            title: '',
-            slug: '',
-            createdAt: '',
-            status: false,
-            content:'',
+        mapPropsToValues: (props) => ({            
+            title: props.admin.post.title || '',
+            slug: props.admin.post.slug || '',
+            createdAt: props.admin.post.createdAt || '',
+            status: props.admin.post.status || false,
+            content: props.admin.post.content  || '',
     }),
     validationSchema: Yup.object().shape({
         title: Yup.string().required('Title is required'),

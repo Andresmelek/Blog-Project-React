@@ -72,7 +72,30 @@ class App extends Component {
       />
 
         <Route 
+        exact={true}
         path="/login/posts/:view"
+        render = {props => {
+          console.log(props)
+         return (
+           <div>
+          {this.props.auth.token?
+           <AdminWrapper>
+             <AddPosts/>
+           </AdminWrapper>
+          :
+           <LoginWrapper>
+             <Login/>
+           </LoginWrapper>
+          }
+          </div>
+       
+         )
+        }}
+      />
+
+        <Route 
+        exact={true}
+        path="/login/posts/:view/:id"
         render = {props => {
           console.log(props)
          return (

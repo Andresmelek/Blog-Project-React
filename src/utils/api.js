@@ -21,13 +21,21 @@ const  API = {
             success(res);
         })
     },
-    addPost: (post, token, succes) => {
+    addPost: (post, token, success) => {
         axios.post(`${host}/api/Posts?access_token=${token}`, post)
         .then(res => {
-            succes(res);
+            success(res);
         })
+    },
+    getSinglePost: (id, token, success) => {
+        axios.get(`${host}/api/Posts/${id}?access_token=${token}`)
+        .then(res => {
+            console.log('res', res)
+                success(res)
+            })
+        }
     }
-}
+
 
 
 
