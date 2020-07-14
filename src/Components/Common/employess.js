@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
+
+//Class that renders the employess in the  team page
 class Employe extends Component {
     render(){
         return (

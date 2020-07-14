@@ -3,6 +3,8 @@ import Field from '../Common/fields';
 import {withFormik} from 'formik';
 import * as Yup from 'yup';
 
+
+//Array with the elements to be rendered
 const fields = [
     {classname: '', name: 'name', elementName: 'input', type: 'text', placeholder:'Your Name'},
     {classname: '', name: 'email', elementName: 'input', type: 'email', placeholder:'Your email'},
@@ -10,6 +12,7 @@ const fields = [
 ]
 const text = [{classname: 'col-md-6', name: 'message', elementName: 'textarea', type: 'text', placeholder:'Type your message'}]
 
+//Class that renders the contact page
 class Contact extends Component {
   
 

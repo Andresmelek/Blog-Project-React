@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
+
+//Class that renders the logos for the logos' page
 class SingleLogo extends Component {
     render(){
         return(

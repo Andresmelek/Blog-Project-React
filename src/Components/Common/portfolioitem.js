@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 
+//Class that renders  the portfolio items in the Portfolio page
 class PortfolioItem extends Component {
     render(){
         return (

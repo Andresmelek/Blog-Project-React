@@ -22,6 +22,7 @@ import Divider from '@material-ui/core/Divider';
 
 const drawerWidth = 240;
 
+//styles the login page
 const styles = theme => ({
     root: {
         display: 'flex',
@@ -78,7 +79,7 @@ const styles = theme => ({
 
     }})
 
-
+//class that wraps the login page when the admin is logged in
 class AdmindWrapper extends Component {
 
     constructor(props){

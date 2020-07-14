@@ -3,7 +3,7 @@ const defaultState = {
     token: null
 }
 
-// action has the object type and payload
+//Function that state changes when the users logs in
 const auth = (state = defaultState, action) => {
 
   if (action.type === 'LOGIN') {

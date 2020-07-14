@@ -5,12 +5,13 @@ import rootReducer from './actions/reducers';
 import thunk from 'redux-thunk';
 
 
+
+//Stores the data
 const persistConfig = {
     key: 'root',
     storage,
 
 }
-
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export default () => {

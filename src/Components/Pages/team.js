@@ -6,12 +6,16 @@ import img1 from '../Assets/img/team/1.jpg';
 import img2 from '../Assets/img/team/2.jpg';
 import img3 from '../Assets/img/team/3.jpg';
 
+
+//Array with the elements to be render
 const employes = [
     {name: 'Kay Garland', role: 'Lead Designing', picture: img1},
     {name: 'Larry Parker', role: 'Lead Marketer', picture: img2},
     {name: 'Diana Pertender', role: 'Lead Developer', picture: img3},
 ]
 
+
+//Class that renders the team in the login page
 class Team extends Component {
     render() {
         return (

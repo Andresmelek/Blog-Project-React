@@ -9,7 +9,7 @@ import img4 from '../Assets/img/portfolio/04-thumbnail.jpg';
 import img5 from '../Assets/img/portfolio/05-thumbnail.jpg';
 import img6 from '../Assets/img/portfolio/06-thumbnail.jpg';
 
-
+//Array with the elements to be render
 const portfoliotem = [
     {title:'Threads', subtitle:'Illustration', image: img1},
     {title:'Explore', subtitle:'Graphic', image: img2},
@@ -20,6 +20,7 @@ const portfoliotem = [
 
 ];
 
+//class that renders the portfolio page
 class Portfolio extends Component {
     render() {
             return(

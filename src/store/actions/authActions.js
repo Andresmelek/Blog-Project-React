@@ -1,5 +1,7 @@
 import API from '../../utils/api';
 
+
+//Actios fot the log
 export const login = (email, pass) => {
 
     return (dispatch) => {

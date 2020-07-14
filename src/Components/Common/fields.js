@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 
+//Class that renders the fields to fill in the contact page
 class Field extends Component {
   
     render(){

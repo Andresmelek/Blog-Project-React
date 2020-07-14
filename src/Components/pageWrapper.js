@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
 
 
+//Class that wraps the content of the page
 class PageWrapper extends Component {
 
     render(){

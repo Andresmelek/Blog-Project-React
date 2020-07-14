@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 
 
+
+//Class that render the header in the main page and the about page
 class Header extends Component {
     render(){
         return (

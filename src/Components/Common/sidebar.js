@@ -12,12 +12,14 @@ import FaceIcon from '@material-ui/icons/Face';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 
+//Function that list items for the side Bar when the admin is logged in the login page
 const ListItemLink = props => {
     return (
         <ListItem button component={RouterLink} {...props} />
     )
 }
 
+//class that renders the icons in the sideBar when the admin is logged inlogin Page
 class SideBar extends Component {
     render(){
         return (

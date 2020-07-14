@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import {connect} from 'react-redux';
 import * as authActions from '../../store/actions/authActions';
 
+
+//Array with the elemens to be render
 const fields = [
     {name: 'email', elementName: 'input', type: 'email', placeholder:'Your email'},
     {name: 'password', elementName: 'input', type: 'password', placeholder:'Your password'},
@@ -12,7 +14,7 @@ const fields = [
 
 ]
 
-
+//Class that renders the login page
 class Login extends Component {
     render(){
         return (

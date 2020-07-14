@@ -3,6 +3,7 @@ import Header from '../Common/Header';
 import image from '../Assets/img/about.jpg'
 
 
+//Class that renders the about page
 class About extends Component {
     render() {
         return (

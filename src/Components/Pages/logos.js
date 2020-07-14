@@ -7,6 +7,8 @@ import img2 from '../Assets/img/logos/2.jpg';
 import img3 from '../Assets/img/logos/3.jpg'; 
 import img4 from '../Assets/img/logos/4.jpg'; 
 
+
+//Array with the images to be render
 const logos = [
     {img: img1},
     {img: img2},
@@ -14,6 +16,8 @@ const logos = [
     {img: img4}
 ]
 
+
+//class that renders the logos in the main page
 class Logo extends Component {
     render(){
         return (

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+
+//Class that renders the items in the timeline page
 class Items extends Component {
     render(){
         return (   

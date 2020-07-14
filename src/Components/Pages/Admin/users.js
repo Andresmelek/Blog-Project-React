@@ -32,6 +32,7 @@ class Users extends Component {
     }
 }
 
+//Selects the data to be stored and return the data with the component needed
 const mapStateToProps = state => {
     return {
         auth: state.auth,
@@ -39,6 +40,8 @@ const mapStateToProps = state => {
     }
 }
 
+
+//Dispatch the data stored
 const mapDispatchToProps = dispatch => {
     return {
         getUsers: (token) => {

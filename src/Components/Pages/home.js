@@ -10,6 +10,8 @@ import Team from '../Pages/team';
 import Logo from '../Pages/logos';
 import Contact from './contacts';
 
+
+//Class that renders the main page
 class Home extends Component {
     render(){
 

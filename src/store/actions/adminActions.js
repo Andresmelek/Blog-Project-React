@@ -1,5 +1,8 @@
 import API from '../../utils/api';
 
+
+//Actions for the admin user
+
 export const  getUsers = token => {
 
     return (dispatch) => {
@@ -24,4 +27,15 @@ export const getPosts = token => {
         })
     }
 
+}
+
+export const addPost = (post, token) => {
+    return (dispatch) => {
+        API.addPost(post, token, res => {
+            dispatch({
+                type: 'ADD_POST',
+                payload: res.data
+            })
+        })
+    }
 }

@@ -8,6 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 
+//Class that creates a table for the admin managment
 class TableView extends Component {
 
     render() {
@@ -31,13 +32,22 @@ class TableView extends Component {
                     <TableBody>
                         {rows ?
                             rows.map((row, index) => {
-                                return columns.map((column, colIndex) => {
+
                                     return (
-                                        <TableCell key={colIndex}>
-                                            {row[column.name]}
-                                        </TableCell>
+                                        <TableRow>
+                                    {
+                                        columns.map((column, colIndex) => {
+                                            return (
+                                                <TableCell key={colIndex}>
+                                                    {row[column.name]}
+                                                </TableCell>
+                                            )
+                                        })
+                                    }
+                                </TableRow>
                                     )
-                                })
+
+                                
                             })
                         :null
                         }
