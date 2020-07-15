@@ -97,7 +97,6 @@ class App extends Component {
         exact={true}
         path="/login/posts/:view/:id"
         render = {props => {
-          console.log(props)
          return (
            <div>
           {this.props.auth.token?

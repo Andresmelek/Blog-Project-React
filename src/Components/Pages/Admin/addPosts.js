@@ -8,8 +8,12 @@ import { FormikTextField, FormikSelectField } from 'formik-material-fields';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import { withRouter } from 'react-router-dom';
+import ImageIcon from '@material-ui/icons/Image';
+import API from '../../../utils/api';
 import * as Yup from 'yup';
 
+
+/* global $ */
 
 //Styles fot the add post frame
 const styles = theme => ({
@@ -39,13 +43,19 @@ const styles = theme => ({
         marginLeft: '50px',
         left: '-50px',
 
+    }, 
+    save: {
+        marginBottom: theme.spacing.unit * 3,
+    },
+    postImage: {
+        width: '100%'
     }
 
 });
 
 //Class that renders the page to the admin add posts
 class AddPosts extends Component {
-
+   
     //Get that last props and last state
     componentDidUpdate(props, state){
         if (this.props.match.params.view === 'add' && this.props.admin.posts.filter(e => props.title === this.props.values.title).lenght > 0) {
@@ -53,11 +63,21 @@ class AddPosts extends Component {
             this.props.history.push('/admin/post/edit/' + post.dispatch);
 
         }
-    }
+        //When redux state changes post in admin reducer
+        if (this.props.admin.post.id !== props.admin.post.id) {
+            this.props.setValues(this.props.admin.post)
+        }
 
+        }
+
+    uploadImage = (e) => {
+        const data = new FormData();
+        data.append('file', e.target.files[0], new Date().getTime().toString() +  e.target.files[0].name);
+        this.props.uploadImage(data, this.props.auth.token, this.props.admin.post.id, this.props.auth.user.userId)
+    }
+        
     //To intert data into
     componentDidMount(props, state) {
-        console.log('here', this.props.match.params)
         if (this.props.match.params.view === 'edit' && this.props.match.params.id){
             this.props.getSinglePost(this.props.match.params.id, this.props.auth.token)
         }
@@ -103,6 +123,7 @@ class AddPosts extends Component {
                             {label:'Published', value: true}
                         ]}
                     />
+                    <div className={classes.save}>
                         <Button className={classes.button} 
                         variant="contained" 
                         color="secondary"
@@ -110,6 +131,24 @@ class AddPosts extends Component {
                             this.props.handleSubmit()
                         }}
                         ><SaveIcon/>Save</Button>
+                    </div>
+                        {this.props.admin.post.postImage?
+                        
+                            <img alt="Upload" src={API.makeFileURL(this.props.admin.post.postImage[0].url, this.props.auth.token)} className={classes.postImage} />
+                        
+                        : null
+                        }
+                    <div>
+                        <Button color="primary"
+                        variant="contained"
+                        onClick={e => {
+                            this.refs.fileUploader.click();
+                        }}
+                        >
+                        <ImageIcon/> Uplaod post Image
+                        </Button>
+                        <input  type="file" ref="fileUploader" style={{display: 'none'}}  onChange={this.uploadImage}/>
+                    </div>
                 </Paper>
                 </form>
             </div>
@@ -127,12 +166,17 @@ const mapStateToProps = state => ({
 //Dispatch the data
 const mapDispatchToProps = dispatch => ({
     addPost: (post, token) => {
-        dispatch(adminActions.addPost(post, token))
+        dispatch(adminActions.addPost(post, token));
+    },
+    updatePost: (post, token) => {
+        dispatch(adminActions.updatePost(post, token));
     },
     getSinglePost: (id, token) => {
-        dispatch(adminActions.getSinglePost(id, token))
+        dispatch(adminActions.getSinglePost(id, token));
+    },
+    uploadImage: (data, token, postId, userId) => {
+        dispatch(adminActions.uploadImage(data, token, postId, userId));
     }
-
 })
 
 export default withRouter(connect(
@@ -154,7 +198,14 @@ export default withRouter(connect(
     }),
     handleSubmit: (values, {setSubmitting, props}) => {
         console.log('Saving', props.addPost);
-        props.addPost(values, props.auth.token)
-
+        if(props.match.params.view === 'edit'){
+            const post = {
+                ...values,
+                id: props.match.params.id   
+            }
+            props.updatePost(post, props.auth.token);
+        } else {
+            props.addPost(values, props.auth.token);
+        }
     }
 })(withStyles(styles)(AddPosts))));

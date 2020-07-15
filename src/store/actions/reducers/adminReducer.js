@@ -30,7 +30,32 @@ const admin = (state = defaultState, action) => {
             post: action.payload
         }
 
-    }else {
+    }else if (action.type === 'UPDATE_POST'){
+        return {
+            ...state,
+            post: action.payload,
+            posts: state.posts.map(post => {
+                //The existing post in redux that has been updated
+                //and is currently in action.payload
+                if (post.id === action.payload.id){
+                    return {...post,
+                    ...action.payload
+                    }
+                } else {
+                    return post
+                }
+            })
+        }
+    } else if (action.type === 'UPLOAD_IMAGE') {
+        return {
+            ...state,
+            post: {
+                ...state.post,
+                postImage: [action.payload]
+            }
+        }
+
+    } else {
         return state
     }
 }
