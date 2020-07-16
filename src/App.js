@@ -13,6 +13,8 @@ import Contact from './Components/Pages/contacts';
 import AdminWrapper from './Components/AdminWrapper';
 import LoginWrapper from './Components/loginWrapper';
 import Login from './Components/Pages/login';
+import Blog from './Components/Pages/blog';
+import Single from './Components/Pages/single';
 
 
 //Admins Pages
@@ -75,7 +77,6 @@ class App extends Component {
         exact={true}
         path="/login/posts/:view"
         render = {props => {
-          console.log(props)
          return (
            <div>
           {this.props.auth.token?
@@ -151,6 +152,25 @@ class App extends Component {
             <About {...props}/>
           </PageWrapper>}
         />
+
+          <Route
+          exact={true}
+          path="/blog/:slug"
+          render={props =>
+          <PageWrapper>
+            <Single {...props}/>
+          </PageWrapper>}
+        />
+
+        <Route
+          exact={true}
+          path="/blog"
+          render={props =>
+          <PageWrapper>
+            <Blog {...props}/>
+          </PageWrapper>}
+        />
+
 
         <Route 
             path="/services"

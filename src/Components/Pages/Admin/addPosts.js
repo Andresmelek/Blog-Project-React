@@ -11,7 +11,8 @@ import { withRouter } from 'react-router-dom';
 import ImageIcon from '@material-ui/icons/Image';
 import API from '../../../utils/api';
 import * as Yup from 'yup';
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 /* global $ */
 
@@ -27,7 +28,7 @@ const styles = theme => ({
     }, 
     leftside: {
         flex: 4,
-        height: '300px',
+        height: '100%',
         margin: theme.spacing.unit * 3,
         padding: theme.spacing.unit * 3
     },
@@ -83,6 +84,24 @@ class AddPosts extends Component {
         }
     }
 
+    modules = {
+        toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],
+            [{header:1}, {header: 2}],
+            [{list: 'ordered'}, {list: 'bullet'}],
+            [{indent: '-1'}, {indent: '+1'}],
+            [{size: ['small', 'medium', 'large','huge']}],
+            [{color: []}, {background:[]}],
+            ['image'],
+            ['clean']
+        ]
+    }
+
+    formats = [
+        'header', 'bold', 'italic', 'underline', 'strike', 'blockquote', 'script',
+        'list', 'bullet', 'indent', 'link', 'image', 'color', 'code-block'
+    ]
+
     render(){
         const { classes } = this.props;
         return (
@@ -105,12 +124,14 @@ class AddPosts extends Component {
                         fullwidt
                     />
                     <br/>
-                    <FormikTextField    
-                        name="content"
-                        label="Content"
-                        margin="normal"
-                        fullwidth
+                    <ReactQuill
+                        value={this.props.values.content}
+                        placeholder="Write what insperes you"
+                        onChange={val => this.props.setFieldValue('content', val) }
+                        modules={this.modules}
+                        formats={this.formats}
                     />
+
                     </Paper>
                     <br/>
                 <Paper className={classes.rightside}>
@@ -133,22 +154,12 @@ class AddPosts extends Component {
                         ><SaveIcon/>Save</Button>
                     </div>
                         {this.props.admin.post.postImage?
-                        
+                            this.props.admin.post.postImage.length > 0?
                             <img alt="Upload" src={API.makeFileURL(this.props.admin.post.postImage[0].url, this.props.auth.token)} className={classes.postImage} />
-                        
+                        : null
                         : null
                         }
-                    <div>
-                        <Button color="primary"
-                        variant="contained"
-                        onClick={e => {
-                            this.refs.fileUploader.click();
-                        }}
-                        >
-                        <ImageIcon/> Uplaod post Image
-                        </Button>
-                        <input  type="file" ref="fileUploader" style={{display: 'none'}}  onChange={this.uploadImage}/>
-                    </div>
+                   
                 </Paper>
                 </form>
             </div>
@@ -157,7 +168,7 @@ class AddPosts extends Component {
     }
 }
 
-//Selects the data to be stored and return the data with the component needed
+//Selects the data to be stored and returns the data with the component needed
 const mapStateToProps = state => ({
     auth: state.auth,
     admin: state.admin

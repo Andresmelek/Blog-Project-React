@@ -43,7 +43,9 @@ class Posts extends Component {
                     rows={posts}
                 </TableView>
 
-                <Fab component={RouterLink} to="/login/posts/add" color="secondary" arial-label="Add" className={classes.fab}>
+                <Fab component={RouterLink} to="/login/posts/add" 
+                color="secondary" arial-label="Add" className={classes.fab}
+                >
                     <EditIcon/>
                 </Fab>
             </div>

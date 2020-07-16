@@ -33,7 +33,10 @@ const admin = (state = defaultState, action) => {
     }else if (action.type === 'UPDATE_POST'){
         return {
             ...state,
-            post: action.payload,
+            post: {
+                ...state.post,
+                ...action.payload,
+            },
             posts: state.posts.map(post => {
                 //The existing post in redux that has been updated
                 //and is currently in action.payload
